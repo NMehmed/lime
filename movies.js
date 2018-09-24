@@ -53,8 +53,8 @@ const movies = {
             xmlHttp.onreadystatechange = function () {
                 if (xmlHttp.readyState === 4 && (xmlHttp.status === 200 || xmlHttp.status === 304))
                     resolve(xmlHttp.responseText)
-                else if (xmlHttp.readyState === 4 && xmlHttp.status !== 200)
-                    reject(xmlHttp.responseText)
+                else if (xmlHttp.readyState === 4)
+                    reject('Error')
             }
 
             xmlHttp.open("GET", url, true)
