@@ -7,7 +7,7 @@ const movies = {
                 .then((movies) => {
                     titles = movies.titles
 
-                    if (totalPages > 1) this._getAllTitles(term, movies.totalPages)
+                    if (movies.totalPages > 1) this._getAllTitles(term, movies.totalPages)
                         .then((restOfMovies) => {
                             restOfMovies.forEach(data => {
                                 titles = titles.concat(data.titles)
