@@ -13,6 +13,7 @@ contract CryptoCars is Ownable {
         uint length;
         string[] cars;
         mapping(bytes32 => uint256) carIndex;
+        uint256 moenySpent;
     }
     mapping(bytes32 => Car) public cars;
     mapping(address => ArrOfCars) public owners;
@@ -55,6 +56,7 @@ contract CryptoCars is Ownable {
         owners[sender].length++;
         owners[sender].cars.push(carModel);
         owners[sender].carIndex[carModelHash] = owners[msg.sender].length - 1;
+        owners[sender].moenySpent = owners[sender].moenySpent + value;
     }
     
     function buyFromUs(string carModel, bytes32 carModelHash, address sender, uint256 value) private {
@@ -67,6 +69,7 @@ contract CryptoCars is Ownable {
         owners[sender].length++;
         owners[sender].cars.push(carModel);
         owners[sender].carIndex[carModelHash] = owners[msg.sender].length - 1;
+        owners[sender].moenySpent = owners[sender].moenySpent + value;
         
         owners[oldOwner].length--;
         uint256 soldCarIndex = owners[oldOwner].carIndex[carModelHash];
@@ -87,6 +90,10 @@ contract CryptoCars is Ownable {
         require((owners[_address].cars.length > _index), 'index not available');
 
         return owners[_address].cars[_index];
+    }
+
+    function getUserMoneySpent(address _address) public view returns(uint256) {
+        return owners[_address].moenySpent;
     }
     
     function whoOwnsTheCar(string model) public view onlyAvailableCars(model) returns(address, uint256) {

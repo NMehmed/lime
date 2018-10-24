@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 text-center">
+      <h1>Crypto Cars</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 text-center">
+      <button class="btn btn-info" (click)="getCurrentBlock()">Get Current Block Number</button>
+    </div>
+  </div>
+  <div class="row" *ngIf="currentBlock">
+    <div class="col-12 text-center align-self-center billboard">{{currentBlock}}</div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-12 text-center">
+      <button class="btn btn-info" (click)="getGasPrice()">Get Gas Price</button>
+    </div>
+  </div>
+  <div class="row" *ngIf="gasPrice">
+    <div class="col-12 text-center align-self-center billboard">{{gasPrice}}</div>
+  </div>
+  <br>
+  <hr>
+  <div class="row">
+    <div class="col-12 text-center">
+      <input type="text" [(ngModel)]="address" placeholder="0x...">
+      <button class="btn btn-info" (click)="getUserCarsAndMoneySpent()">Get User Cars and money spent</button>
+    </div>
+  </div>
+  <div class="row" *ngIf="cars">
+    <div *ngFor="let car of cars" class="col-12 text-center align-self-center billboard">{{car}}</div>
+    <div class="col-12 text-center align-self-center billboard">Whei spent: {{moneySpent}}</div>
+  </div>
+  <br>
+  <hr>
+  <div class="row">
+    <div class="col-12 text-center">
+      <input type="text" [(ngModel)]="carModel" placeholder="car model">
+      <button class="btn btn-info" (click)="whoOwnsTheCarAndHowMuchItCosts()">Get who owns the car and the price</button>
+    </div>
+  </div>
+  <div class="row" *ngIf="buyerAddress">
+    <div class="col-12 text-center align-self-center billboard">{{buyerAddress}}</div>
+    <div class="col-12 text-center align-self-center billboard">Car price in whei: {{carPrice}}</div>
+  </div>
+</div>
